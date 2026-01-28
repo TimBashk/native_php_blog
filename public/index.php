@@ -1,39 +1,39 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
 
-use App\Models\Category;
+use App\Controllers\MainController;
 use Smarty\Smarty;
+use App\Http\Request;
+use App\Controllers\CategoryController;
+use App\Controllers\PostController;
 
 $smarty = new Smarty();
 $smarty->setTemplateDir(__DIR__ . '/../templates');
 $smarty->setCompileDir(__DIR__ . '/../templates_c');
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$request = new Request();
 
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = trim($path, '/');
 
 $routes = [
-    '' => function() use ($smarty) { // главная
-        $categories = Category::getWithPosts(3);
-        $smarty->assign('categories', $categories);
-        $smarty->display('index.tpl');
+    '' => function() use ($smarty, $request) {
+        $controller = new MainController($smarty);
+        $controller->index();
     },
-
-    'index.php' => function() use ($smarty) { // главная через index.php
-        $categories = Category::getWithPosts(3);
-        $smarty->assign('categories', $categories);
-        $smarty->display('index.tpl');
+    'index.php' => function() use ($smarty, $request) {
+        $controller = new MainController($smarty);
+        $controller->index();
     },
-
-    'category.php' => function() {
-        include __DIR__ . '/category.php';
+    'category.php' => function() use ($smarty, $request) {
+        $controller = new CategoryController($smarty, $request);
+        $controller->show();
     },
-
-    'post.php' => function() {
-        include __DIR__ . '/post.php';
+    'post.php' => function() use ($smarty, $request) {
+        $controller = new PostController($smarty, $request);
+        $controller->show();
     }
 ];
-
 
 if (isset($routes[$path])) {
     $routes[$path]();
