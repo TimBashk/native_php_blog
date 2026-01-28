@@ -26,7 +26,8 @@ class CategoryController
         $category = Category::find($categoryId);
         if (!$category) {
             http_response_code(404);
-            exit('Category not found');
+            $this->smarty->display('404.tpl');
+            exit(0);
         }
 
         $breadcrumbs = [

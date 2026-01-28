@@ -25,7 +25,8 @@ class PostController
         $post = Post::find($postId);
         if (!$post) {
             http_response_code(404);
-            exit('Post not found');
+            $this->smarty->display('404.tpl');
+            exit(0);
         }
 
         $categories = Category::getByPost($postId);
