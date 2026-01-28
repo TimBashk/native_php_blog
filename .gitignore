@@ -1,3 +1,4 @@
 /vendor
 .idea
 /templates_c
+/.env

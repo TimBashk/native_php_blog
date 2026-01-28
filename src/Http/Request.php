@@ -10,7 +10,6 @@ class Request
         $this->get = $get ?? $_GET;
     }
 
-    // Получение GET-параметра с дефолтом и кастом типом
     public function getInt(string $key, int $default = 0, bool $required = false): int
     {
         $value = $this->get[$key] ?? $default;
