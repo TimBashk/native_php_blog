@@ -1,0 +1,20 @@
+{
+  "name": "vendor_name/native_php_blog",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "timur",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "smarty/smarty": "^5.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
