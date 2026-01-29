@@ -20,31 +20,6 @@ class Post {
         return $stmt->fetchAll();
     }
 
-    public static function getAllByCategory(int $categoryId, string $sort = 'date'): array
-    {
-        $db = Database::getInstance();
-
-        // Определяем поле сортировки
-        $orderBy = match($sort) {
-            'views' => 'p.views DESC',
-            default => 'p.created_at DESC'
-        };
-
-        $sql = "
-        SELECT p.*
-        FROM posts p
-        JOIN post_categories pc ON pc.post_id = p.id
-        WHERE pc.category_id = :category_id
-        ORDER BY $orderBy
-    ";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public static function getByCategoryWithPagination(int $categoryId, string $sort = 'date', int $limit = 5, int $offset = 0): array
     {
         $db = Database::getInstance();

@@ -11,6 +11,7 @@ class CategoryController
 {
     private Smarty $smarty;
     private Request $request;
+    const PER_PAGE = 3;
 
     public function __construct(Smarty $smarty, Request $request)
     {
@@ -36,7 +37,7 @@ class CategoryController
         ];
 
         $page = max(1, $this->request->getInt('page', 1));
-        $perPage = 3;
+        $perPage = self::PER_PAGE;
         $offset = ($page - 1) * $perPage;
 
         $posts = Post::getByCategoryWithPagination($categoryId, $sort, $perPage, $offset);
