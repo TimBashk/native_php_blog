@@ -27,3 +27,8 @@ Singleton для базы (Database):
 
 Сидинг:
 1. Скрипт для заполнения базы тестовыми категориями и статьями (10 категорий × 10 постов) - php src/Seedr.php
+
+Запуск:
+1. Сборка: docker compose up --build
+2. Установка зависимостей: docker-compose exec native_php_blog composer install
+3. Создать директорию templates_c для кэширования шаблонов smarty, дать права: mkdir templates_c, chmod 777 templates_c 
