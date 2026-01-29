@@ -56,13 +56,13 @@ class BlogSeeder
         $this->db->exec("
             CREATE TABLE IF NOT EXISTS categories (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(255),
+                name VARCHAR(255),
                 description TEXT
             )
         ");
 
         $this->db->exec("
-            CREATE TABLE IF NOT EXISTS articles (
+            CREATE TABLE IF NOT EXISTS posts (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 title VARCHAR(255),
                 description TEXT,
@@ -74,10 +74,10 @@ class BlogSeeder
         ");
 
         $this->db->exec("
-            CREATE TABLE IF NOT EXISTS article_category (
-                article_id INT,
+            CREATE TABLE IF NOT EXISTS post_categories (
+                post_id INT,
                 category_id INT,
-                PRIMARY KEY (article_id, category_id)
+                PRIMARY KEY (post_id, category_id)
             )
         ");
     }
